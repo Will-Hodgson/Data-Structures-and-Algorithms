@@ -20,22 +20,34 @@ public class Stack {
 	public int length() {
 		return length;
 	}
+	
+	public boolean isEmpty() {
+		return length == 0;
+	}
+	
+	public boolean isFull() {
+		return length == size;
+	}
+	
+	// Pre-Condition: The stack is not full
 	public void add(int n) {
 		
-		assert length < size;
+		assert !isFull();
 		stack[length] = n;
 		length += 1;
 	}
 	
+	// Pre-Condition: The stack is not empty
 	public int peek() {
 		
-		assert length > 0;
+		assert !isEmpty();
 		return stack[length-1];
 	}
 	
+	// Pre-Condition: The stack is not empty
 	public int pop() {
 		
-		assert length > 0;
+		assert !isEmpty();
 		length -= 1;
 		return stack[length];
 	}
