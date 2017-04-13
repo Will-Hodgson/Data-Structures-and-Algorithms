@@ -1,14 +1,15 @@
 package dataStructures;
 
-public class Stack {
-	private int[] stack;
+public class Stack<T> {
+	private T[] stack;
 	private int length;
 	private int size;
 	
+	@SuppressWarnings("unchecked")
 	public Stack(int n) {
 		
 		assert n > 0;
-		stack = new int[n];
+		stack = (T[]) new Object[n];
 		size = n;
 		length = 0;
 	}
@@ -30,7 +31,7 @@ public class Stack {
 	}
 	
 	// Pre-Condition: The stack is not full
-	public void add(int n) {
+	public void add(T n) {
 		
 		assert !isFull();
 		stack[length] = n;
@@ -38,14 +39,14 @@ public class Stack {
 	}
 	
 	// Pre-Condition: The stack is not empty
-	public int peek() {
+	public T peek() {
 		
 		assert !isEmpty();
 		return stack[length-1];
 	}
 	
 	// Pre-Condition: The stack is not empty
-	public int pop() {
+	public T pop() {
 		
 		assert !isEmpty();
 		length -= 1;
