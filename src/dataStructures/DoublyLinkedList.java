@@ -1,11 +1,16 @@
 package dataStructures;
 
-public class DoublyLinkedList {
+public class DoublyLinkedList<T> {
 	
-	private Node head;
-	private Node tail;
+	private Node<T> head;
+	private Node<T> tail;
 	
 	public DoublyLinkedList() {
+		head = null;
+		tail = null;
+	}
+	
+	public void clear() {
 		head = null;
 		tail = null;
 	}
@@ -14,8 +19,8 @@ public class DoublyLinkedList {
 		return head == null;
 	}
 	
-	public void addHead(int n) {
-		Node node = new Node(n);
+	public void pushHead(T n) {
+		Node<T> node = new Node<T>(n);
 		if (head == null) {
 			head = node;
 			tail = node;
@@ -27,8 +32,8 @@ public class DoublyLinkedList {
 		}
 	}
 	
-	public void addTail(int n) {
-		Node node = new Node(n);
+	public void pushTail(T n) {
+		Node<T> node = new Node<T>(n);
 		if (tail == null) {
 			head = node;
 			tail = node;
@@ -40,28 +45,28 @@ public class DoublyLinkedList {
 		}
 	}
 	
-	public int peekHead() {
+	public T peekHead() {
 		assert head != null;
 		return head.data();
 	}
 	
-	public int peekTail() {
+	public T peekTail() {
 		assert tail != null;
 		return tail.data();
 	}
 	
-	public int popHead() {
+	public T popHead() {
 		assert head != null;
 		if (tail == head) {
 			// There is only 1 value left in the linked list
-			Node temp = tail;
+			Node<T> temp = tail;
 			temp.setNext(null);
 			temp.setPrev(null);
 			tail = null;
 			head = null;
 			return temp.data();
 		}
-		Node temp = head;
+		Node<T> temp = head;
 		head = head.next();
 		head.setPrev(null);
 		temp.setPrev(null);
@@ -69,18 +74,18 @@ public class DoublyLinkedList {
 		return temp.data();
 	}
 	
-	public int popTail() {
+	public T popTail() {
 		assert tail != null;
 		if (tail == head) {
 			// There is only 1 value left in the linked list
-			Node temp = tail;
+			Node<T> temp = tail;
 			temp.setNext(null);
 			temp.setPrev(null);
 			tail = null;
 			head = null;
 			return temp.data();
 		}
-		Node temp = tail;
+		Node<T> temp = tail;
 		tail = tail.prev();
 		tail.setNext(null);
 		temp.setPrev(null);
@@ -88,14 +93,14 @@ public class DoublyLinkedList {
 		return temp.data();
 	}
 	
-	public boolean inList(int n) {
+	public boolean inList(T n) {
 		if (head == null) {
 			return false;
 		}
 		if (head.data() == n) {
 			return true;
 		}
-		Node nextNode = head.next();
+		Node<T> nextNode = head.next();
 		while (nextNode != null) {
 			if (nextNode.data() == n) {
 				return true;
@@ -105,7 +110,7 @@ public class DoublyLinkedList {
 		return false;
 	}
 	
-	public void remove(int n) {
+	public void remove(T n) {
 		if (head == null) {
 			return;
 		}
@@ -119,7 +124,7 @@ public class DoublyLinkedList {
 			tail.setNext(null);
 			return;
 		}
-		Node nextNode = head.next();
+		Node<T> nextNode = head.next();
 		while (nextNode != null) {
 			if (nextNode.data() == n) {
 				if (nextNode.next() == null) {

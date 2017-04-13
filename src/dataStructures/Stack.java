@@ -1,21 +1,17 @@
 package dataStructures;
 
 public class Stack<T> {
-	private T[] stack;
+	private DoublyLinkedList<T> stack;
 	private int length;
-	private int size;
 	
-	@SuppressWarnings("unchecked")
-	public Stack(int n) {
-		
-		assert n > 0;
-		stack = (T[]) new Object[n];
-		size = n;
+	public Stack() {		
+		stack = new DoublyLinkedList<T>();
 		length = 0;
 	}
 	
 	public void clear() {
 		length = 0;
+		stack.clear();
 	}
 	
 	public int length() {
@@ -26,15 +22,9 @@ public class Stack<T> {
 		return length == 0;
 	}
 	
-	public boolean isFull() {
-		return length == size;
-	}
-	
-	// Pre-Condition: The stack is not full
 	public void add(T n) {
 		
-		assert !isFull();
-		stack[length] = n;
+		stack.pushHead(n);
 		length += 1;
 	}
 	
@@ -42,7 +32,7 @@ public class Stack<T> {
 	public T peek() {
 		
 		assert !isEmpty();
-		return stack[length-1];
+		return stack.peekHead();
 	}
 	
 	// Pre-Condition: The stack is not empty
@@ -50,6 +40,6 @@ public class Stack<T> {
 		
 		assert !isEmpty();
 		length -= 1;
-		return stack[length];
+		return stack.popHead();
 	}
 }

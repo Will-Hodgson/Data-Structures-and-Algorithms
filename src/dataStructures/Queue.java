@@ -1,26 +1,18 @@
 package dataStructures;
 
-public class Queue {
+public class Queue<T> {
 
-	private int[] queue;
+	private DoublyLinkedList<T> queue;
 	private int length;
-	private int size;
-	private int head; // head refers to the next element in the queue
-	private int tail; // tail refers to the next open spot in the queue
 	
-	public Queue(int n) {
-		assert n > 0;
-		queue = new int[n];
+	public Queue() {
+		queue = new DoublyLinkedList<T>();
 		length = 0;
-		size = n;
-		head = 0;
-		tail = 0;
 	}
 	
 	public void clear() {
-		head = 0;
-		tail = 0;
 		length = 0;
+		queue.clear();
 	}
 	
 	public int length() {
@@ -31,33 +23,24 @@ public class Queue {
 		return length == 0;
 	}
 	
-	public boolean isFull() {
-		return length == size;
-	}
-	
-	// Pre-Condition: The queue is not full
-	public void add(int n) {
+	public void add(T n) {
 		
-		assert !isFull();
-		queue[tail] = n;
-		tail = (tail + 1) % size;
+		queue.pushTail(n);
 		length += 1;
 	}
 	
 	// Pre-Condition: The queue is not empty
-	public int peek() {
+	public T peek() {
 		
 		assert !isEmpty();
-		return queue[head];
+		return queue.peekHead();
 	}
 	
 	// Pre-Condition: The queue is not empty
-	public int pop() {
+	public T pop() {
 		
 		assert !isEmpty();
-		int temp = queue[head];
-		head = (head + 1) % size;
 		length -= 1;
-		return temp;
+		return queue.popHead();
 	}
 }
